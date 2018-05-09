@@ -1,0 +1,68 @@
+<main>
+  <div class="left">
+    <div class="userinfo">
+      <!-- nzSrc="//zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" -->
+      <nz-avatar class="usr-ico" nzText="USER" nzSize="large" style="color:#f56a00; background-color:#fde3cf;"></nz-avatar>
+      <nz-dropdown class="usr-name">
+        <a class="ant-dropdown-link" nz-dropdown>
+          usr-one
+          <i class="anticon anticon-down"></i>
+        </a>
+        <ul nz-menu>
+          <li nz-menu-item>
+            <a rel="noopener noreferrer" href="javascript:">修改密码</a>
+          </li>
+          <li nz-menu-item>
+            <a rel="noopener noreferrer" href="javascript:" (click)="logout()">退出系统</a>
+          </li>
+        </ul>
+      </nz-dropdown>
+    </div>
+    <ul nz-menu [nzMode]="'horizontal'">
+      <li nz-menu-item routerLinkActive="ant-menu-submenu-selected">
+        <a href="javascript:" title="" (click)="openTag('home')" routerLink="/home">
+          说明
+        </a>
+      </li>
+      <li nz-menu-item routerLinkActive="ant-menu-submenu-selected">
+        <a href="javascript:" title="方案设定" (click)="openTag('scheme')" routerLink="/scheme">
+          方案设定
+        </a>
+      </li>
+      <li nz-menu-item routerLinkActive="ant-menu-submenu-selected">
+        <a href="javascript:" title="菜单3" (click)="openTag('contact')" routerLink="/contact">
+          contact
+        </a>
+      </li>
+      <li nz-menu-item routerLinkActive="ant-menu-submenu-selected">
+        <a href="javascript:" title="菜单4" (click)="openTag('dashboard')" routerLink="/dashboard">
+          dashboard
+        </a>
+      </li>
+    </ul>
+    <div class="vip">
+      <perfect-scrollbar class="scroll" [config]="config">
+        <div class="pbutton">
+          <a href="javascript:" (click)="openTag('tag/ws')">ws</a>
+          <a href="javascript:" (click)="openTag('tag/sp')">sp</a>
+          <a href="javascript:" (click)="openTag('tag/ssp')">ssp</a>
+        </div>
+      </perfect-scrollbar>
+    </div>
+  </div>
+  <div class="right">
+    <div class="view">
+      <nz-tabset [nzType]="'card'" [nzSelectedIndex]="selectedTabIndex">
+        <nz-tab *ngFor="let tab of tabs;index as i;" (nzClick)="openTag(tab.router)">
+          <ng-template #nzTabHeading>
+            <div>
+              <span routerLink="{{tab.router}}" routerLinkActive="active">{{tab.alias}}</span>
+              <i class="anticon anticon-cross" (click)="closeTab(tab)" *ngIf="i > 0"></i>
+            </div>
+          </ng-template>
+        </nz-tab>
+      </nz-tabset>
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</main>

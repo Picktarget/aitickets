@@ -1,0 +1,105 @@
+<div class="wrapper">
+  <div class="login animated fadeInLeft" *ngIf="loginOrReg">
+    <div class="logo">
+      {{logo}}
+    </div>
+    <form nz-form [formGroup]="loginForm" novalidate class="login-form">
+      <div nz-form-item>
+        <div nz-form-control nzHasFeedback>
+          <nz-input formControlName="userName" [nzPlaceHolder]="'用户名'" [nzSize]="'large'">
+            <ng-template #prefix>
+              <i class="anticon anticon-user"></i>
+            </ng-template>
+          </nz-input>
+          <div nz-form-explain *ngIf="loginForm.controls.userName.dirty&&loginForm.controls.userName.hasError('required')">Please input your username!</div>
+        </div>
+      </div>
+      <div nz-form-item>
+        <div nz-form-control nzHasFeedback>
+          <nz-input formControlName="password" [nzType]="'password'" [nzPlaceHolder]="'密码'" [nzSize]="'large'">
+            <ng-template #prefix>
+              <i class="anticon anticon-lock"></i>
+            </ng-template>
+          </nz-input>
+          <div nz-form-explain *ngIf="loginForm.controls.password.dirty&&loginForm.controls.password.hasError('required')">Please input your Password!</div>
+        </div>
+      </div>
+      <div nz-form-item>
+        <div nz-form-control>
+          <label>还没有账户？前往
+            <a href="javascript:" (click)="gotoReg()">注册</a>
+          </label>
+          <a href="javascript:" class="login-form-forgot">忘记密码?</a>
+          <button nz-button class="login-form-button" [nzType]="'primary'" [nzSize]="'large'" (click)="login($event)" [nzLoading]="isLoadingLogin">登&nbsp;&nbsp;录</button>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="login login-reg animated fadeInLeft" *ngIf="!loginOrReg">
+    <div class="logo">
+      {{logo}}
+    </div>
+    <form nz-form [formGroup]="regForm" novalidate class="login-form">
+      <div nz-form-item>
+        <div nz-form-control nzHasFeedback>
+          <nz-input formControlName="userName" [nzPlaceHolder]="'用户名'" [nzSize]="'large'">
+            <ng-template #prefix>
+              <i class="anticon anticon-user"></i>
+            </ng-template>
+          </nz-input>
+          <div nz-form-explain *ngIf="regForm.controls.userName.dirty&&regForm.controls.userName.hasError('required')">Please input your username!</div>
+        </div>
+      </div>
+      <div nz-form-item>
+        <div nz-form-control nzHasFeedback>
+          <nz-input formControlName="password" [nzType]="'password'" [nzPlaceHolder]="'密码'" [nzSize]="'large'">
+            <ng-template #prefix>
+              <i class="anticon anticon-lock"></i>
+            </ng-template>
+          </nz-input>
+          <div nz-form-explain *ngIf="loginForm.controls.password.dirty&&loginForm.controls.password.hasError('required')">Please input your Password!</div>
+        </div>
+      </div>
+      <div nz-form-item>
+        <div nz-form-control nzHasFeedback>
+          <nz-input formControlName="re_password" [nzType]="'password'" [nzPlaceHolder]="'重复密码'" [nzSize]="'large'">
+            <ng-template #prefix>
+              <i class="anticon anticon-lock"></i>
+            </ng-template>
+          </nz-input>
+          <div nz-form-explain *ngIf="regForm.controls.re_password.dirty&&regForm.controls.re_password.hasError('required')">Please repeat your Password!</div>
+        </div>
+      </div>
+      <div nz-form-item>
+        <div nz-form-control nzHasFeedback>
+          <nz-input formControlName="captcha" [nzPlaceHolder]="'邀请码'" [nzSize]="'large'">
+            <ng-template #prefix>
+              <i class="anticon anticon-qrcode"></i>
+            </ng-template>
+          </nz-input>
+          <div nz-form-explain *ngIf="regForm.controls.captcha.dirty&&regForm.controls.captcha.hasError('required')">Please input your captcha!</div>
+        </div>
+      </div>
+      <div nz-form-item>
+        <div nz-form-control>
+          <label>已经有账户？前往
+            <a href="javascript:" (click)="gotoLogin()">登录</a>
+          </label>
+          <button nz-button class="login-form-button" [nzType]="'primary'" [nzSize]="'large'" (click)="register($event)" [nzLoading]="isLoadingReg">注&nbsp;&nbsp;册</button>
+        </div>
+      </div>
+    </form>
+  </div>
+  <ul class="bg-bubbles" style="display:none">
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+  </ul>
+</div>

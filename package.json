@@ -2,13 +2,51 @@
   "name": "aitickets",
   "version": "0.0.0",
   "license": "MIT",
+  "main": "./main.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Picktarget/aitickets.git"
+  },
+  "description": "ai tickets",
+  "author": "",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "dev": "ng build --base-href ./ --deploy-url ./ && electron .",
     "build": "ng build --prod",
+    "pack:win64": "ng build --prod --base-href ./ --deploy-url ./ && electron-builder --arch=x64 --publish never",
+    "release:win64": "ng build --prod --base-href ./ --deploy-url ./ && electron-builder --arch=x64 --publish always",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
+  },
+  "build": {
+    "productName": "AI Tickets",
+    "appId": "com.AITickets.client",
+    "artifactName": "${productName}-${version}-${os}-${arch}-setup.${ext}",
+    "win": {
+      "target": "nsis",
+      "icon": "build/icons/icon.png"
+    },
+    "files": [
+      "**/*",
+      "!**/e2e/**/*",
+      "!**/src/**/*",
+      "!**/.angular-cli.json",
+      "!**/karma.conf.js",
+      "!**/protractor.conf.js",
+      "!**/tsconfig.json",
+      "!**/tslint.json"
+    ],
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "deleteAppDataOnUninstall": true
+    },
+    "directories": {
+      "buildResources": "build",
+      "output": "release"
+    }
   },
   "private": true,
   "dependencies": {
@@ -22,6 +60,10 @@
     "@angular/platform-browser-dynamic": "^5.2.0",
     "@angular/router": "^5.2.0",
     "core-js": "^2.4.1",
+    "electron-updater": "^2.21.10",
+    "ng-zorro-antd": "^0.6.15",
+    "ngx-electron": "^1.0.4",
+    "ngx-perfect-scrollbar": "^5.3.5",
     "rxjs": "^5.5.6",
     "zone.js": "^0.8.19"
   },
@@ -33,6 +75,8 @@
     "@types/jasminewd2": "~2.0.2",
     "@types/node": "~6.0.60",
     "codelyzer": "^4.0.1",
+    "electron": "^2.0.0",
+    "electron-builder": "^20.13.2",
     "jasmine-core": "~2.8.0",
     "jasmine-spec-reporter": "~4.2.1",
     "karma": "~2.0.0",

@@ -1,0 +1,320 @@
+<div nz-row>
+  <div nz-col [nzXs]="24">
+    <div class="panel-box">
+      <div class="panel-title">
+        <h3>当日情况</h3>
+      </div>
+      <div class="panel-body">
+        <ul class="today-info">
+          <li>用户名:</li>
+          <li>下注金额:</li>
+          <li>余额:</li>
+          <li>输赢金额:</li>
+        </ul>
+        <div class="clearfix"></div>
+      </div>
+      <div class="panel-footer"></div>
+    </div>
+  </div>
+  <div nz-col [nzXs]="24" [nzSm]="12">
+    <div class="panel-box">
+      <div class="panel-title">
+        <h3>站点服务器</h3>
+      </div>
+      <div class="panel-body" style="max-height: 255px;overflow: auto;">
+        <nz-table #nzTable [nzDataSource]="data" [nzIsPagination]="false" [nzShowTotal]="true">
+          <thead nz-thead>
+            <tr>
+              <th nz-th>
+                <span>服务器</span>
+              </th>
+              <th nz-th>
+                <span>状态</span>
+              </th>
+            </tr>
+          </thead>
+          <tbody nz-tbody>
+            <tr nz-tbody-tr *ngFor="let data of nzTable.data">
+              <td nz-td>{{data.name}}</td>
+              <td nz-td>{{data.age}}</td>
+            </tr>
+          </tbody>
+        </nz-table>
+      </div>
+      <div class="panel-footer"></div>
+    </div>
+  </div>
+  <div nz-col [nzXs]="24" [nzSm]="12">
+    <div class="panel-box">
+      <div class="panel-title">
+        <h3>连接站点</h3>
+      </div>
+      <div class="panel-body">
+        <form nz-form [formGroup]="loginForm" class="login-form" (ngSubmit)="_submitForm()">
+          <div nz-form-item nz-row>
+            <div nz-form-label nz-col [nzSm]="6" [nzXs]="24">
+              <label for="userName" nz-form-item-required>站点选择</label>
+            </div>
+            <div nz-form-control nz-col [nzSm]="14" [nzXs]="12">
+              <nz-select formControlName="selectedOption" [nzPlaceHolder]="'请选择站点'">
+                <nz-option *ngFor="let option of options" [nzLabel]="option.label" [nzValue]="option.value" [nzDisabled]="option.disabled">
+                </nz-option>
+              </nz-select>
+            </div>
+          </div>
+          <div nz-form-item nz-row>
+            <div nz-form-label nz-col [nzSm]="6" [nzXs]="24">
+              <label for="userName" nz-form-item-required>用户名</label>
+            </div>
+            <div nz-form-control nz-col [nzSm]="14" [nzXs]="12" nzHasFeedback>
+              <nz-input formControlName="ip_userName" [nzId]="'ip_userName'"></nz-input>
+              <div nz-form-explain *ngIf="loginForm.get('ip_userName').dirty&&loginForm.get('ip_userName').hasError('ip_userName')">The input is not valid E-mail!</div>
+            </div>
+          </div>
+          <div nz-form-item nz-row>
+            <div nz-form-label nz-col [nzSm]="6" [nzXs]="24">
+              <label for="password" nz-form-item-required>密码</label>
+            </div>
+            <div nz-form-control nz-col [nzSm]="14" [nzXs]="12" nzHasFeedback>
+              <nz-input formControlName="password" [nzType]="'password'" [nzId]="'password'"></nz-input>
+              <div nz-form-explain *ngIf="loginForm.get('password').dirty&&loginForm.get('password').hasError('required')">Please input your password!</div>
+            </div>
+          </div>
+          <div nz-form-item nz-row>
+            <div nz-form-control nz-col [nzSm]="6" [nzXs]="24"></div>
+            <div nz-form-control nz-col [nzSm]="14" [nzXs]="12">
+              <label nz-checkbox formControlName="remember">
+                <span>记住密码</span>
+              </label>
+            </div>
+          </div>
+          <div nz-form-item nz-row>
+            <div nz-form-control nz-col [nzSm]="6" [nzXs]="24"></div>
+            <div nz-form-control nz-col [nzSpan]="14">
+              <button nz-button [nzType]="'primary'" [nzSize]="'large'">登录</button>
+              <button nz-button [nzType]="'primary'" [nzSize]="'large'">保存设置</button>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="panel-footer"></div>
+    </div>
+  </div>
+  <div nz-col [nzSpan]="24">
+    <div class="panel-box">
+      <div class="panel-title">
+        <h3>基本参数设置区</h3>
+      </div>
+      <div class="panel-body">
+        <ul class="today-info">
+          <li class="w33">
+            <span class="title">实际盈利:</span>
+            <span>999</span>
+          </li>
+          <li class="w33">
+            <span class="title">模拟盈利:</span>
+            <span>9999</span>
+          </li>
+          <li class="w33">
+            <span class="title">总下注额:</span>
+            <span>898</span>
+          </li>
+          <li class="w33">
+            <label nz-checkbox [(ngModel)]="isHiddenOdds">
+              <span>隐藏赔率</span>
+            </label>
+            <label nz-checkbox [(ngModel)]="isVoiced">
+              <span>声音提示</span>
+            </label>
+          </li>
+          <li class="w33">
+            <span class="title">止盈:</span>
+            <nz-input-number [(ngModel)]="stopProfit" [nzMin]="1" [nzMax]="88888888" [nzStep]="1"></nz-input-number>
+          </li>
+          <li class="w33">
+            <span class="title">止损:</span>
+            <nz-input-number [(ngModel)]="stopLoss" [nzMin]="1" [nzMax]="88888888" [nzStep]="1"></nz-input-number>
+          </li>
+          <li class="w33">
+            <span class="title">大额分投:</span>
+            <nz-input-number [(ngModel)]="stopLoss" [nzMin]="1" [nzMax]="88888888" [nzStep]="1"></nz-input-number>
+          </li>
+          <li class="w33">
+            <span class="title">投注记录超过:</span>
+            <nz-input-number [(ngModel)]="stopLoss" [nzMin]="1" [nzMax]="88888888" [nzStep]="1"></nz-input-number>
+            <span class="end">清空列表</span>
+          </li>
+          <li class="w33">
+            <span class="title">止盈止损依据:</span>
+            <nz-select style="width: 120px;" [(ngModel)]="selectedOption" [nzPlaceHolder]="'请选择'">
+              <nz-option *ngFor="let option of options" [nzLabel]="option.label" [nzValue]="option.value" [nzDisabled]="option.disabled">
+              </nz-option>
+            </nz-select>
+          </li>
+        </ul>
+        <div class="clearfix"></div>
+      </div>
+      <div class="panel-footer"></div>
+    </div>
+  </div>
+  <div nz-col [nzSpan]="24">
+    <div class="panel-box">
+      <div class="panel-title">
+        <h3>高级参数设置区</h3>
+      </div>
+      <div class="panel-body">
+        <div class="gjsetting">
+          <label for="">1、模拟切换</label>
+          <ul>
+            <li>
+              <label nz-checkbox [(ngModel)]="isHiddenOdds">
+                <span>模拟投注输</span>
+              </label>
+              <nz-input-number [(ngModel)]="stopLoss" [nzMin]="1" [nzMax]="88888888" [nzStep]="1"></nz-input-number>
+              <span>转换成真实投注（并重置投注资金）</span>
+            </li>
+            <li>
+              <label nz-checkbox [(ngModel)]="isHiddenOdds">
+                <span>真实投注输</span>
+              </label>
+              <nz-input-number [(ngModel)]="stopLoss" [nzMin]="1" [nzMax]="88888888" [nzStep]="1"></nz-input-number>
+              <span>转换成模拟投注（并重置投注资金）</span>
+            </li>
+            <li>
+              <label nz-checkbox [(ngModel)]="isHiddenOdds">
+                <span>模拟投注赢</span>
+              </label>
+              <nz-input-number [(ngModel)]="stopLoss" [nzMin]="1" [nzMax]="88888888" [nzStep]="1"></nz-input-number>
+              <span>转换成真实投注（并重置投注资金）</span>
+            </li>
+            <li>
+              <label nz-checkbox [(ngModel)]="isHiddenOdds">
+                <span>真实投注赢</span>
+              </label>
+              <nz-input-number [(ngModel)]="stopLoss" [nzMin]="1" [nzMax]="88888888" [nzStep]="1"></nz-input-number>
+              <span>转换成模拟投注（并重置投注资金）</span>
+            </li>
+          </ul>
+          <div class="clearfix"></div>
+        </div>
+        <div class="gjsetting">
+          <label for="">2、方案轮盘</label>
+          <div class="inner">
+            <nz-switch [ngModel]="false">
+              <span checked>轮盘开始中</span>
+              <span unchecked>轮盘停止中</span>
+            </nz-switch>
+            <span>依次投注方案：</span>
+            <a class="inline-input">
+              <nz-input class="inline-input" [(ngModel)]="inputValue" [nzPlaceHolder]="'1,2,3,4,5,停'" (ngModelChange)="_console($event)"
+                [nzSize]="'small'"></nz-input>
+            </a>
+            <span>
+              至[方案止盈止损]或[全中完]切换下一方案
+            </span>
+            <label nz-checkbox [(ngModel)]="isHiddenOdds">
+              <span>自动停止新增</span>
+            </label>
+          </div>
+        </div>
+        <div class="gjsetting">
+          <label for="">3、智能合并</label>
+          <div class="inner">
+            <nz-switch [ngModel]="false">
+              <span checked>合并开始中</span>
+              <span unchecked>合并停止中</span>
+            </nz-switch>
+            <span>同样金额的投注，每次下注最多合并数量</span>
+            <nz-input-number [(ngModel)]="stopLoss" [nzMin]="1" [nzMax]="88888888" [nzStep]="1"></nz-input-number>
+            <span>（比如设置9，有15笔投注10元的注单，软件分成9+6两次投注）</span>
+            <span>说明：软件会把所有方案的所有注单组合，抵消筛选，合并金额。比如要投第一名大10元和第一名小30元，软件只投第一名小20元.双面和数字都适用。可以有效防止亏水。</span>
+          </div>
+        </div>
+        <div class="gjsetting">
+          <label for="">4、开盘就投</label>
+          <div class="inner">
+            <nz-switch [ngModel]="false">
+              <span checked>开始中</span>
+              <span unchecked>停止中</span>
+            </nz-switch>
+            <span>不等结算，开盘就进行投注（注意：此功能，由于没有最新的开奖结果不能算出输赢来翻倍，所以建议只设置一个金额）</span>
+          </div>
+        </div>
+      </div>
+      <div class="panel-footer"></div>
+    </div>
+  </div>
+  <div nz-col [nzSpan]="24">
+    <div class="panel-box">
+      <div class="panel-title">
+        <h3>北京赛车(PK10)</h3>
+      </div>
+      <div class="panel-body">
+        <ul class="kjsetting">
+          <li>期数：</li>
+          <li>封盘：</li>
+          <li>开奖：</li>
+          <li class="large">
+            <label nz-checkbox [(ngModel)]="isHiddenOdds">
+              <span>自动开始</span>
+            </label>
+            <nz-timepicker [(ngModel)]="_date"></nz-timepicker>
+            <label nz-checkbox [(ngModel)]="isHiddenOdds">
+              <span>自动停止</span>
+            </label>
+            <nz-timepicker [(ngModel)]="_date"></nz-timepicker>
+          </li>
+          <li class="large">
+            <label nz-checkbox [(ngModel)]="isHiddenOdds">
+              <span>停止新增投注</span>
+            </label>
+            <nz-switch [ngModel]="false">
+              <span checked>开始中</span>
+              <span unchecked>停止中</span>
+            </nz-switch>
+            <label nz-checkbox [(ngModel)]="isHiddenOdds">
+              <span>模拟模式</span>
+            </label>
+            <nz-select style="width: 120px;" [(ngModel)]="selectedOption" [nzPlaceHolder]="'请选择'">
+              <nz-option *ngFor="let option of options" [nzLabel]="option.label" [nzValue]="option.value" [nzDisabled]="option.disabled">
+              </nz-option>
+            </nz-select>
+            <button nz-button [nzType]="'dashed'">
+              <span>重复下注</span>
+            </button>
+          </li>
+        </ul>
+        <div class="clearfix"></div>
+        <nz-radio-group [(ngModel)]="size">
+          <label nz-radio-button [nzValue]="'default1'">
+            <span>开奖历史</span>
+          </label>
+          <label nz-radio-button [nzValue]="'default'">
+            <span>投注状态</span>
+          </label>
+          <label nz-radio-button [nzValue]="'default2'">
+            <span>手动投注</span>
+          </label>
+        </nz-radio-group>
+        <nz-table #nzTable [nzDataSource]="data" [nzIsPagination]="false" [nzShowTotal]="true">
+          <thead nz-thead>
+            <tr>
+              <th nz-th>
+                <span>服务器</span>
+              </th>
+              <th nz-th>
+                <span>状态</span>
+              </th>
+            </tr>
+          </thead>
+          <tbody nz-tbody>
+            <tr nz-tbody-tr *ngFor="let data of nzTable.data">
+              <td nz-td>{{data.name}}</td>
+              <td nz-td>{{data.age}}</td>
+            </tr>
+          </tbody>
+        </nz-table>
+      </div>
+    </div>
+  </div>
+</div>
