@@ -1,9 +1,0 @@
-version: 0.0.0
-files:
-  - url: aitickets-setup-0.0.0.exe
-    sha512: 2dHZ2bROJdMdFxApBw2nwue5xX0MCpRq+KhqR8V85kiJBoinSZONiYYMtJ/m3D4xXgGWTYMKW0jmQ/2xLSyslA==
-    size: 43486370
-path: aitickets-setup-0.0.0.exe
-sha512: 2dHZ2bROJdMdFxApBw2nwue5xX0MCpRq+KhqR8V85kiJBoinSZONiYYMtJ/m3D4xXgGWTYMKW0jmQ/2xLSyslA==
-sha2: e6f921b45eb157d7dc1a0a6bb02ae23f3bc764e2baa678652bac9b714cd423f6
-releaseDate: '2018-05-09T03:04:53.859Z'
