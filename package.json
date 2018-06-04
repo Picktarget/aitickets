@@ -11,6 +11,7 @@
   "author": "",
   "scripts": {
     "ng": "ng",
+    "postinstall": "electron-builder install-app-deps",
     "start": "ng serve",
     "dev": "ng build --base-href ./ --deploy-url ./ && electron .",
     "build": "ng build --prod",
@@ -18,7 +19,8 @@
     "release:win64": "ng build --prod --base-href ./ --deploy-url ./ && electron-builder --arch=x64 --publish always",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "rebuild": "electron-rebuild -f -w sqlite3"
   },
   "build": {
     "productName": "AI Tickets",
@@ -29,14 +31,18 @@
       "icon": "build/icons/icon.png"
     },
     "files": [
-      "**/*",
-      "!**/e2e/**/*",
-      "!**/src/**/*",
-      "!**/.angular-cli.json",
-      "!**/karma.conf.js",
-      "!**/protractor.conf.js",
-      "!**/tsconfig.json",
-      "!**/tslint.json"
+      "main.js",
+      "dist/*",
+      "server/*",
+      "!node_modules/ngx-electron",
+      "!node_modules/ngx-perfect-scrollbar",
+      "!node_modules/perfect-scrollbar",
+      "!node_modules/rxjs",
+      "!node_modules/ng-zorro-antd",
+      "!node_modules/zone.js/*",
+      "!node_modules/core-js",
+      "!node_modules/@angular",
+      "!node_modules/moment"
     ],
     "nsis": {
       "oneClick": false,
@@ -61,9 +67,12 @@
     "@angular/router": "^5.2.0",
     "core-js": "^2.4.1",
     "electron-updater": "^2.21.10",
+    "knex": "^0.14.6",
+    "lowdb": "^1.0.0",
     "ng-zorro-antd": "^0.6.15",
     "ngx-electron": "^1.0.4",
     "ngx-perfect-scrollbar": "^5.3.5",
+    "node-pre-gyp": "^0.10.0",
     "rxjs": "^5.5.6",
     "zone.js": "^0.8.19"
   },
@@ -75,7 +84,7 @@
     "@types/jasminewd2": "~2.0.2",
     "@types/node": "~6.0.60",
     "codelyzer": "^4.0.1",
-    "electron": "^2.0.0",
+    "electron": "^1.8.4",
     "electron-builder": "^20.13.2",
     "jasmine-core": "~2.8.0",
     "jasmine-spec-reporter": "~4.2.1",

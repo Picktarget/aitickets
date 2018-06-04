@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ContactComponent } from '../contact/contact.component';
 import { LayoutRouteModlue } from './layout-routing.module';
 import { LayoutComponent } from './layout.component';
+import {NgxElectronModule} from 'ngx-electron';
 
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
@@ -30,7 +31,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         FormsModule,
         ReactiveFormsModule,
         NgZorroAntdModule,
-        PerfectScrollbarModule
+        PerfectScrollbarModule,
+        NgxElectronModule
     ],
     providers: [
         {

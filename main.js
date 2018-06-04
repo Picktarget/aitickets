@@ -16,6 +16,11 @@ const {
   // process.env.GH_TOKEN = '9f06a255956a06eccc7527996290c33c5d324ba2';
   // 保持一个对于 window 对象的全局引用，如果你不这样做，
   // 当 JavaScript 对象被垃圾回收， window 会被自动地关闭
+
+  // sqlite3 stuff
+
+  let sql = require('./server/db')
+
   let win
   
   function createWindow() {
